@@ -1,4 +1,4 @@
-%% Auto_mapper is a script or function used to
+%% Auto_mapper is a script or function used to map images automatically
 
 clear all
 close all
