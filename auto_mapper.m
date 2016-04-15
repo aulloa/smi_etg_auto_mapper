@@ -1,5 +1,5 @@
 % Auto_mapper is a script or function used to map images automatically
-% sfd;fklsfd
+%
 
 
 %% Script running
@@ -34,7 +34,7 @@ showMatchedFeatures(fix,mov,matchedfix,matchedmov);
 [tform2, inliermov, inlierfixed] = estimateGeometricTransform(matchedmov,matchedfix,'projective');
 
 outputView = imref2d(size(fix));
-fin = imwarp(imS,tform2);%%,'OutputView',outputView);
+fin = imwarp(imS,tform2,'OutputView',outputView);
 
 figure; imshowpair(fin,fix);
 
