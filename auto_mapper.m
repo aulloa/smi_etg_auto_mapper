@@ -6,7 +6,7 @@
 close all
 %% Definitions
 imR = im2double(imread('image3.png'));
-imS = im2double(imread('1.png'));
+imS = im2double(imread('2.png'));
 B = imresize(imR, .1);
 
 fix = B(:,:,1);
