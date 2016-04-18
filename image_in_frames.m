@@ -10,7 +10,7 @@ for i = 1:size(video,4)
     frame = video(:,:,:,i);
     [index_pair,~,~] = feature_match(ref_image,frame);
     if isempty(index_pair) || isrow(index_pair) % check if frame has enough features to warrant detection
-        
+       a =i;
     else
         in_frame_index(i) = i;
     end
