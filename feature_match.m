@@ -2,26 +2,26 @@ function [index_pairs,matched_ref,matched_frame] = feature_match(ref_image,frame
 % The goal of frame finder is to look through a video to see where images
 % show up.
 close all
-%% Definitions
-fix = ref_image(:,:,1);
-mov = frame(:,:,1);
-
-%figure; imshowpair(fix,mov);
+%% grey scale images
+grey_ref_image = ref_image(:,:,1);
+grey_frame = frame(:,:,1);
 
 %% Feature Detection
-ptsfix = detectSURFFeatures(fix);
-ptsmov = detectSURFFeatures(mov);
+ptsref = detectSURFFeatures(grey_ref_image,'NumOctaves',4);
+pts_frame = detectSURFFeatures(grey_frame,'NumOctaves',4);
+
 %% Feature Extraction
-[featfix, validPTSfix] = extractFeatures(fix,ptsfix);
-[featmov, validPTSmov] = extractFeatures(mov,ptsmov);
+[featfix, validPTSref] = extractFeatures(grey_ref_image,ptsref);
+[featmov, validPTSframe] = extractFeatures(grey_frame,pts_frame);
 
 %% Proccessing
 index_pairs = matchFeatures(featfix,featmov);
 
-matched_ref = validPTSfix(index_pairs(:,1));
-matched_frame = validPTSmov(index_pairs(:,2));
+matched_ref = validPTSref(index_pairs(:,1));
+matched_frame = validPTSframe(index_pairs(:,2));
 
-%figure;
-%showMatchedFeatures(fix,mov,matchedfix,matchedmov);
+%% Optional Plotting
+% figure;
+% showMatchedFeatures(grey_ref_image,grey_frame,matched_ref,matched_frame);
 
 end
