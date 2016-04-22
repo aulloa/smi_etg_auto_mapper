@@ -11,7 +11,7 @@ ptsref = detectSURFFeatures(grey_ref_image,'NumOctaves',4);
 pts_frame = detectSURFFeatures(grey_frame,'NumOctaves',4);
 
 %% Feature Extraction
-[featfix, validPTSref] = extractFeatures(grey_ref_image,ptsref);
+[featfix, validPTSref] = extaractFeatures(grey_ref_image,ptsref);
 [featmov, validPTSframe] = extractFeatures(grey_frame,pts_frame);
 
 %% Proccessing
