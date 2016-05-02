@@ -5,11 +5,11 @@ function [frames] = frames_containing_image( ref_image, video,sensitivity)
 % ref_image: Type double image used as a reference
 % video: type 4D - double
 % sensitivity: type double, number of features that determine a match
-    %recommend 2-3
+%              recommend 2-3
 
 % ----outputs----
 % frames: Type double array of index values for the frames which contain
-% the reference image in video
+%         the reference image in video
 
 % ----how it works----
 % The code uses feature_match to search for matching features of the
