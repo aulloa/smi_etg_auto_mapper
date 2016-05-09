@@ -12,7 +12,7 @@ end_edge_cases   = zeros(num_edge_cases,length(blocks_end));% preallocate
 %% find edge cases before blocks
 for i = 1:length(blocks_start)% for all in blacks_start
     if blocks_start(i) ==0% if starts at zero set to zero
-        start_edge_cases(i,1) = 1;
+        start_edge_cases(:,1) = 1;
     else
         % include frames from start - num_edge_cases chosen to start
         start_edge_cases(:,i)= blocks_start(i)-(num_edge_cases-1):blocks_start(i);
@@ -22,7 +22,7 @@ end
 %% find edge cases after blocks
 for i = 1:length(blocks_end)
     if blocks_end(i) == last_frame
-        end_edge_cases(i,1) = 1;
+        end_edge_cases(:,1) = 1;
     else
         % include frames from end to end + num_edge_cases chosen
         end_edge_cases(:,i)= blocks_end(i):blocks_end(i)+(num_edge_cases-1);
