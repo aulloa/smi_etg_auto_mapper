@@ -22,6 +22,6 @@ ffmpeg_command_string = ['-i',' ',input_file_name,...
                                 ' -an -vcodec rawvideo -y',' ',...
                                 output_file_name];
 ffmpegexec(ffmpeg_command_string);
-uncompressed_file_name = [output_file_name '.avi'];
+uncompressed_file_name = [output_file_name];
 end
 

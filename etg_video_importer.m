@@ -22,13 +22,16 @@ function video = etg_video_importer(input_file_name)
 % The toolbox requires ffmpeg to be installed, then run the toolbox setup
 % file
 %%
-[~,~,ext] = fileparts(input_file_name);
-output_file_name = ['uncomp' input_file_name];
+[~,~,ext] = fileparts(input_file_name); % grab extension
+output_file_name = ['uncomp' input_file_name]; % create uncompressed file name if uncompression is needed
+%% checks if uncompressed video already exists so that it may skip the
+    % decompression step
 if exist(output_file_name,'file') == 2
+    warning('uncompressed video exists already, skipping decompression')
     v                = VideoReader(output_file_name);
     video            = read(v,[1 inf]);
-% if avi
 end
+%% decompression and importation of .avi
 if ext == '.avi'
     % make sure ffmpeg is installed
     assert(exist('ffmpegexec','file') ==2,'please install ffmpeg toolbox in path')
@@ -39,10 +42,11 @@ if ext == '.avi'
     disp('decompressing')
     
     % uncompress file and save file
-    uncomp_file_name = uncompress_avi_video(output_file_name,input_file_name);
+    uncomp_file_name = uncompress_avi_video(output_file_name,input_file_name)
     
     % now that file is uncompressed ensure it won't be deleted
-    output_file_name = 0;
+    global uncompressed
+    uncompressed = 0;
     
     % create video object and read object with the umcompressed file
     v                = VideoReader(uncomp_file_name);
@@ -57,7 +61,8 @@ end
 
 function myCleanupFun(output_file_name)
 %% fucntion which runs when finishup is destroyed
-if output_file_name == 0
+global uncompressed
+if uncompressed == 0
     disp('file saved')
 else
     delete(output_file_name)
