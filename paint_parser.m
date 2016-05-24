@@ -25,4 +25,5 @@ for i = 1:length(edge_cases)
     imshow(video(:,:,:,frame_to_show))
     include_ind = menu('Is painting in frame?','Yes','No')
 end
+
 close all

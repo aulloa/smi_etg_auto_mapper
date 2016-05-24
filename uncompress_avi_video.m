@@ -14,13 +14,13 @@ function uncompressed_file_name = uncompress_avi_video(output_file_name,input_fi
 %----Dependencies----
 % Uses the ffmpeg toolbox version 2.2 found on stack exhange and can be
 %   installed using the "Add-Ons" Toolstrip in matlab
-% The toolbox requires ffmpeg to be installed, follow instruction for
-%   toolbox setup
+% The toolbox requires ffmpeg to be installed, follow instruction in the
+%   toolbox setup file
 
 %% Create a command string and run it through ffmpeg
 ffmpeg_command_string = ['-i',' ',input_file_name,...
-                                '.avi -an -vcodec rawvideo -y',' ',...
-                                output_file_name,'.avi'];
+                                ' -an -vcodec rawvideo -y',' ',...
+                                output_file_name];
 ffmpegexec(ffmpeg_command_string);
 uncompressed_file_name = [output_file_name '.avi'];
 end
