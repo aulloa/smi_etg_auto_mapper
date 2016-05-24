@@ -1,4 +1,4 @@
-function [frames] = frames_containing_image( ref_image, video,sensitivity)
+function [auto_frames] = auto_frames_containing_image( ref_image, video,sensitivity)
 %% The goal of this function is to output the frames in which the reference image appears
 % 
 % ----inputs----
@@ -33,5 +33,5 @@ for i = 1:size(video,4)
 %        imshow(video(:,:,:,i))
     end
 end
-frames = frames(frames~=0); % get rid of zeros
+auto_frames = frames(frames~=0); % get rid of zeros
 
