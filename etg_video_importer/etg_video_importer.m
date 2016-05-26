@@ -23,7 +23,7 @@ function video = etg_video_importer(input_file_name)
 % file
 %%
 [~,~,ext] = fileparts(input_file_name); % grab extension
-output_file_name = ['uncomp' input_file_name]; % create uncompressed file name if uncompression is needed
+output_file_name = [input_file_name 'uncomp' ext]; % create uncompressed file name if uncompression is needed
 %% checks if uncompressed video already exists so that it may skip the
     % decompression step
 if exist(output_file_name,'file') == 2

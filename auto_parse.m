@@ -47,7 +47,7 @@ end
 optargs = {4};
 
 % default octave is 4
-optargs(1) = varargin;
+optargs(1:numvarargs) = varargin;
 
 % Place opt arg in memorable variable names
 [octave] = optargs{1};
@@ -93,25 +93,27 @@ for video_name = files_in_vid_dir
     if any(strcmp(ext_v,vid_file_types)) % file is a valid video file type
         
         % import valid video files
-        disp(['importing' ' ' video_name])
-        video  = etg_video_importer(video_name{1,1});% import video
+        disp(['importing' ' ' video_name{1}]);
+        video  = etg_video_importer([ref_vid_dir '/' video_name{1,1}]);% import video
         
         % create a new directory where auto parsed frames will be stored
-        output_dir_for_vid = ['auto_frames' '_' video_name];
-        if exist(output_dir_for_vid,'dir') ==7 % if one already exist don't create a new one
+        output_dir_for_vid = ['auto_frames' '_' video_name{1}];
+        if exist(output_dir_for_vid,'dir') ~=7 % if one already exist don't create a new one
             mkdir(pwd,output_dir_for_vid) % make new dir
         end
 
         % for each ref image in ref
         for ref_image = ref_image_array
             % automatically parse video by image ref
-            resize_im   = imresize(im2double(ref_image),.6);
+            resize_im   = imresize(im2double(ref_image{1}),.6);
             auto_frames = auto_frames_containing_image(resize_im,video,octave);
 
             % save auto_frames as a txt file in a folder created for video
-            frames_out_file_name = [pwd '/' output_dir_for_vid '/' 'autoframes' ref_image_name '.txt']
+            frames_out_file_name = [pwd '/' output_dir_for_vid '/' 'autoframes' ref_image_name{1} '.txt']
             save(frames_out_file_name,'auto_frames','-ascii')
         end
+        % delete video
+        clear video
     else
         warning([video_name{1,1} ' ' 'is not a valid file type, skipping'])
     end

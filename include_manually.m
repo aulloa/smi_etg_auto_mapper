@@ -1,4 +1,4 @@
-
+function all_frames = include_manually(auto_frames,num_edge_cases)
 %% manual parsing of edge cases
 % find blocks of frames with auto_frames_containing_image
 [blocks_start,blocks_end] = find_blocks(auto_frames);
@@ -11,4 +11,6 @@ for i = 1:length(edge_cases)
     frame_to_show = edge_cases(i)
     imshow(video(:,:,:,frame_to_show))
     include_ind = menu('Is painting in frame?','Yes','No')
+end
+
 end
