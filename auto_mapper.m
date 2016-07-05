@@ -1,13 +1,19 @@
-% Auto_mapper is a script or function used to map images automatically
-%
+%% auto_mapper is currently under construction
+    % auto_parse and etg_video_importer are being finished first
+    
+% auto_mapper will take eye tracking data from SMI eye tracking glasses and
+% map the data onto a high resolution image
+
+% automapper will be dependent on autoparse and etg video importer
+    % please read docunentation on both prior to usage
 
 
-%% Script running
+%% Small Prototype Script
 close all
 %% Definitions
 imR = im2double(imread('image3.png'));
 imS = im2double(imread('2.png'));
-B = imresize(imR, .1);
+B   = imresize(imR, .1);
 
 fix = B(:,:,1);
 mov = imS(:,:,1);
@@ -52,24 +58,7 @@ y_t = zeros(1,length(x));
 for i = 1:length(x);
 [x_t(i),y_t(i)]= transformPointsForward(tform2, x(i),y(i));
 end
-%% So the issue here is that the image and points are not mathcing up 
-% because this is not the same point corresponding to the image, to correct
-% this issue we have to determine the point this image came from - 
-% More importantly how do we figure out statistically if this system can be
-% trusted. We cannot go through every fram in this and manuall measure,
-% even then we cannot do it for all negating the point, so we have to
-% create a representative sample, that we are %confident the rror is within
-% this range. Doing this across many different image will give us a gauge
-% of the error in the automatic mapping system. On the other hand there
-% should be test cases run to catch errors on the other side. For example
-% how do we make sure we don't incorrectly mapped samples in our data set?
-% If the mapping system fails it will most likely fail largegly due to the
-% non localized form of error. That is to say failure will result from the
-% object recogniziton softeware and can fail by matching far away points in
-% an image. thus allowing large descrepencies. how do we catch those,
-% implement another object reconginition code, which recognizes how far
-% away the point is from the cross. This will potentially bring up false
-% alarms but may bring up bad data sets, will it amplify error? 
+
 hold on
 plot(x_t(1),y_t(1),'o')
 
